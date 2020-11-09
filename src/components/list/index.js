@@ -2,27 +2,41 @@ import React from 'react';
 
 function Job({ data }) {
   return (
-    <div>
+    <ul>
       {data.map(({ title, offices, id }, i) => (
-        <div key={i}>
-          {' '}
-          - job: {title}, - id: {id}- {(offices = offices.map((item) => item.name).join(', '))}
+        <li key={i}>
+          <div>
+            {title}: {id}
+          </div>
+          <div>{(offices = offices.map((item) => item.name).join(', '))}</div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Section({ data }) {
+  return (
+    <div>
+      {data.map(({ name, className, jobs }, i) => (
+        <div key={i} className={className}>
+          <div>{name}</div>
+          <Job data={jobs} />
         </div>
       ))}
     </div>
   );
 }
 
+function Empty() {
+  return <div>empty</div>;
+}
+
 export default function List({ data }) {
-  console.log('render');
-  return (
-    <div>
-      {data.map(({ name, jobs }, i) => (
-        <div key={i}>
-          <div>Dept: {name}</div>
-          <Job data={jobs} />
-        </div>
-      ))}
-    </div>
-  );
+  let html = <Empty />;
+  if (data.length > 0) {
+    html = <Section data={data} />;
+  }
+
+  return html;
 }

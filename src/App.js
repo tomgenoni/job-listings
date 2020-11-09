@@ -37,19 +37,21 @@ const locations = getLocations(rawData);
 // that's friendly for rendering in components
 const formatData = (data) => {
   // Get departments in the data
-  const filteredDepartments = [];
+  const filteredDepts = [];
   for (const item of data) {
     const department = item.department.name;
-    if (!filteredDepartments.includes(department)) {
-      filteredDepartments.push(department);
+    if (!filteredDepts.includes(department)) {
+      filteredDepts.push(department);
     }
   }
 
   // Create an array that will hold all the newly formatted data
   const formattedData = [];
   // Only include jobs are belong to a given department
-  for (const dept of filteredDepartments) {
-    const item = { name: dept, jobs: data.filter((item) => item.department.name === dept) };
+  for (const dept of filteredDepts) {
+    const className = dept.toLowerCase().replace(/\s/g, '-');
+    const jobs = data.filter((item) => item.department.name === dept);
+    const item = { name: dept, className: className, jobs: jobs };
     formattedData.push(item);
   }
   return formattedData;
@@ -58,7 +60,6 @@ const formatData = (data) => {
 function App() {
   const [department, setDepartment] = useState(departments[0]);
   const [location, setLocation] = useState(locations[0]);
-
   const [listingsData, setListingsData] = useState(formatData(rawData));
 
   // Fires on first render and after change to dropdowns
