@@ -30,6 +30,9 @@ const getLocations = (data) => {
   return unique;
 };
 
+const departments = getDepartments(rawData);
+const locations = getLocations(rawData);
+
 // Takes data, filtered or otherwise, and creates newly formatted array
 // that's friendly for rendering in components
 const formatData = (data) => {
@@ -53,9 +56,6 @@ const formatData = (data) => {
 };
 
 function App() {
-  const departments = getDepartments(rawData);
-  const locations = getLocations(rawData);
-
   const [department, setDepartment] = useState(departments[0]);
   const [location, setLocation] = useState(locations[0]);
 
