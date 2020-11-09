@@ -39,47 +39,52 @@ function App() {
   const [department, setDepartment] = useState(departments[0]);
   const [location, setLocation] = useState(locations[0]);
 
-  // Reset the original data with deep copy and filter using dropdown values
-  let filtered = JSON.parse(JSON.stringify([...json.jobs]));
+  const formatData = () => {
+    // Reset the original data with deep copy and filter using dropdown values
+    let filtered = JSON.parse(JSON.stringify([...json.jobs]));
 
-  // Filter departments if value is not set to "All"
-  if (department !== firstDepartment) {
-    filtered = filtered.filter((item) => item.department.name === department);
-  }
-
-  // Filter locations if value is not set to "All"
-  if (location !== firstLocation) {
-    filtered = filtered
-      .filter((item) => {
-        return (item.offices = item.offices.filter((office) => office.name === location));
-      })
-      .filter((item) => item.offices.length > 0);
-  }
-  // Update the state of the jobs listings with filtered data
-  // Get departments in the data
-  const filteredDepts = [];
-  for (const item of filtered) {
-    const department = item.department.name;
-    if (!filteredDepts.includes(department)) {
-      filteredDepts.push(department);
+    // Filter departments if value is not set to "All"
+    if (department !== firstDepartment) {
+      filtered = filtered.filter((item) => item.department.name === department);
     }
-  }
 
-  // Create an array that will hold all the newly formatted data
-  const formattedData = [];
-  // Only include jobs are belong to a given department
-  for (const dept of filteredDepts) {
-    const className = dept.toLowerCase().replace(/\s/g, '-');
-    const jobs = filtered.filter((item) => item.department.name === dept);
-    const item = { name: dept, className: className, jobs: jobs };
-    formattedData.push(item);
-  }
+    // Filter locations if value is not set to "All"
+    if (location !== firstLocation) {
+      filtered = filtered
+        .filter((item) => {
+          return (item.offices = item.offices.filter((office) => office.name === location));
+        })
+        .filter((item) => item.offices.length > 0);
+    }
+    // Update the state of the jobs listings with filtered data
+    // Get departments in the data
+    const filteredDepts = [];
+    for (const item of filtered) {
+      const department = item.department.name;
+      if (!filteredDepts.includes(department)) {
+        filteredDepts.push(department);
+      }
+    }
+
+    // Create an array that will hold all the newly formatted data
+    const formattedData = [];
+    // Only include jobs are belong to a given department
+    for (const dept of filteredDepts) {
+      const className = dept.toLowerCase().replace(/\s/g, '-');
+      const jobs = filtered.filter((item) => item.department.name === dept);
+      const item = { name: dept, className: className, jobs: jobs };
+      formattedData.push(item);
+    }
+    return formattedData;
+  };
+
+  const listData = formatData();
 
   return (
     <div className='App'>
       <Select onChange={(value) => setDepartment(value)} value={department} data={departments} />
       <Select onChange={(value) => setLocation(value)} value={location} data={locations} />
-      <List data={formattedData} />
+      <List data={listData} />
     </div>
   );
 }
