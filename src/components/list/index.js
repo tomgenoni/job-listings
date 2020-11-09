@@ -3,8 +3,11 @@ import React from 'react';
 function Job({ data }) {
   return (
     <div>
-      {data.map(({ title }, i) => (
-        <div key={i}>job: {title}</div>
+      {data.map(({ title, offices, id }, i) => (
+        <div key={i}>
+          {' '}
+          - job: {title}, - id: {id}- {(offices = offices.map((item) => item.name).join(', '))}
+        </div>
       ))}
     </div>
   );
