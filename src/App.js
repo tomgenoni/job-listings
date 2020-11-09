@@ -6,53 +6,53 @@ import List from './components/list/index';
 // import logo from './logo.svg';
 // import './App.css';
 
+const rawData = [...json.jobs];
+const firstDepartment = 'All Departments';
+const firstLocation = 'All Locations';
+
+// Dropdown data
+const getDepartments = (data) => {
+  const arr = data.map((item) => item.department.name);
+  let unique = [...new Set(arr)];
+  unique.unshift(firstDepartment);
+  return unique;
+};
+
+const getLocations = (data) => {
+  let arr = [];
+  for (const item of data) {
+    item.offices.forEach((office) => {
+      arr.push(office.name);
+    });
+  }
+  let unique = [...new Set(arr)];
+  unique.unshift(firstLocation);
+  return unique;
+};
+
+// Takes data, filtered or otherwise, and creates newly formatted array
+// that's friendly for rendering in components
+const formatData = (data) => {
+  // Get departments in the data
+  const filteredDepartments = [];
+  for (const item of data) {
+    const department = item.department.name;
+    if (!filteredDepartments.includes(department)) {
+      filteredDepartments.push(department);
+    }
+  }
+
+  // Create an array that will hold all the newly formatted data
+  const formattedData = [];
+  // Only include jobs are belong to a given department
+  for (const dept of filteredDepartments) {
+    const item = { name: dept, jobs: data.filter((item) => item.department.name === dept) };
+    formattedData.push(item);
+  }
+  return formattedData;
+};
+
 function App() {
-  const rawData = [...json.jobs];
-  const firstDepartment = 'All Departments';
-  const firstLocation = 'All Locations';
-
-  // Dropdown data
-  const getDepartments = (data) => {
-    const arr = data.map((item) => item.department.name);
-    let unique = [...new Set(arr)];
-    unique.unshift(firstDepartment);
-    return unique;
-  };
-
-  const getLocations = (data) => {
-    let arr = [];
-    for (const item of data) {
-      item.offices.forEach((office) => {
-        arr.push(office.name);
-      });
-    }
-    let unique = [...new Set(arr)];
-    unique.unshift(firstLocation);
-    return unique;
-  };
-
-  // Takes data, filtered or otherwise, and creates newly formatted array
-  // that's friendly for rendering in components
-  const formatData = (data) => {
-    // Get departments in the data
-    const filteredDepartments = [];
-    for (const item of data) {
-      const department = item.department.name;
-      if (!filteredDepartments.includes(department)) {
-        filteredDepartments.push(department);
-      }
-    }
-
-    // Create an array that will hold all the newly formatted data
-    const formattedData = [];
-    // Only include jobs are belong to a given department
-    for (const dept of filteredDepartments) {
-      const item = { name: dept, jobs: data.filter((item) => item.department.name === dept) };
-      formattedData.push(item);
-    }
-    return formattedData;
-  };
-
   const departments = getDepartments(rawData);
   const locations = getLocations(rawData);
 

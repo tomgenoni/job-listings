@@ -14,6 +14,7 @@ function Job({ data }) {
 }
 
 export default function List({ data }) {
+  console.log('render');
   return (
     <div>
       {data.map(({ name, jobs }, i) => (
