@@ -1,2 +1,3 @@
-# job-listings
-Demo of job listings
+# Job listings
+
+Demo of job filtering with React.
