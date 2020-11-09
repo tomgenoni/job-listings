@@ -29,47 +29,52 @@ function App() {
     return unique;
   };
 
-  const departments = getDepartments(rawData);
-  const locations = getLocations(rawData);
-
-  const [department, setDepartment] = useState(departments[0]);
-  const [location, setLocation] = useState(locations[0]);
-
-  const [listingsData, setListingsData] = useState(rawData);
-
-  useEffect(() => {
-    console.log('use effect');
-    let filtered = [...json.jobs];
-
-    if (department !== departments[0]) {
-      filtered = filtered.filter((item) => item.department.name === department);
-    }
-    if (location !== locations[0]) {
-      filtered = filtered
-        .filter((item) => {
-          return (item.offices = item.offices.filter((office) => office.name === location));
-        })
-        .filter((item) => item.offices.length > 0);
-    }
-
+  const formatData = (data) => {
     // Create list of available departments post-filtering
     const filteredDepartments = [];
-    filtered.forEach((item) => {
+    data.forEach((item) => {
       const department = item.department.name;
       if (!filteredDepartments.includes(department)) {
         filteredDepartments.push(department);
       }
     });
 
-    // // Create an objec to hold the jobs for each department
-    const foo = [];
+    // // Create an array to hold the jobs for each department
+    const newData = [];
     // Only include jobs are belong to a given department
-    for (const key of filteredDepartments) {
-      const item = { name: key, jobs: filtered.filter((item) => item.department.name === key) };
-      foo.push(item);
+    for (const dept of filteredDepartments) {
+      const item = { name: dept, jobs: data.filter((item) => item.department.name === dept) };
+      newData.push(item);
     }
-    console.log(foo);
-    setListingsData(foo);
+    return newData;
+  };
+
+  const departments = getDepartments(rawData);
+  const locations = getLocations(rawData);
+
+  const [department, setDepartment] = useState(departments[0]);
+  const [location, setLocation] = useState(locations[0]);
+
+  const [listingsData, setListingsData] = useState(formatData(rawData));
+
+  useEffect(() => {
+    if (department === departments[0] && location === locations[0]) {
+      setListingsData(formatData(rawData));
+    } else {
+      let filtered = JSON.parse(JSON.stringify(rawData));
+
+      if (department !== departments[0]) {
+        filtered = filtered.filter((item) => item.department.name === department);
+      }
+      if (location !== locations[0]) {
+        filtered = filtered
+          .filter((item) => {
+            return (item.offices = item.offices.filter((office) => office.name === location));
+          })
+          .filter((item) => item.offices.length > 0);
+      }
+      setListingsData(formatData(filtered));
+    }
   }, [department, location]);
 
   return (

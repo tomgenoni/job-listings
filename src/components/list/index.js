@@ -16,7 +16,7 @@ export default function List({ data }) {
       {data.map(({ name, jobs }, i) => (
         <div key={i}>
           <div>Dept: {name}</div>
-          {/* <Job data={jobs} /> */}
+          <Job data={jobs} />
         </div>
       ))}
     </div>
