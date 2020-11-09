@@ -8,12 +8,14 @@ import List from './components/list/index';
 
 function App() {
   const rawData = [...json.jobs];
+  const firstDepartment = 'All Departments';
+  const firstLocation = 'All Locations';
 
   // Dropdown data
   const getDepartments = (data) => {
     const arr = data.map((item) => item.department.name);
     let unique = [...new Set(arr)];
-    unique.unshift('All Departments');
+    unique.unshift(firstDepartment);
     return unique;
   };
 
@@ -25,7 +27,7 @@ function App() {
       });
     });
     let unique = [...new Set(arr)];
-    unique.unshift('All Locations');
+    unique.unshift(firstLocation);
     return unique;
   };
 
@@ -58,15 +60,15 @@ function App() {
   const [listingsData, setListingsData] = useState(formatData(rawData));
 
   useEffect(() => {
-    if (department === departments[0] && location === locations[0]) {
-      setListingsData(formatData(rawData));
+    if (department === firstDepartment && location === firstLocation) {
+      setListingsData(formatData([...json.jobs]));
     } else {
-      let filtered = JSON.parse(JSON.stringify(rawData));
+      let filtered = JSON.parse(JSON.stringify([...json.jobs]));
 
-      if (department !== departments[0]) {
+      if (department !== firstDepartment) {
         filtered = filtered.filter((item) => item.department.name === department);
       }
-      if (location !== locations[0]) {
+      if (location !== firstLocation) {
         filtered = filtered
           .filter((item) => {
             return (item.offices = item.offices.filter((office) => office.name === location));
