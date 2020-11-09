@@ -63,29 +63,24 @@ function App() {
 
   // Fires on first render and after change to dropdowns
   useEffect(() => {
-    if (department === firstDepartment && location === firstLocation) {
-      // If no filters are being applied use the original data to render
-      setListingsData(formatData([...json.jobs]));
-    } else {
-      // Reset the original data with deep copy and filter using dropdown values
-      let filtered = JSON.parse(JSON.stringify([...json.jobs]));
+    // Reset the original data with deep copy and filter using dropdown values
+    let filtered = JSON.parse(JSON.stringify([...json.jobs]));
 
-      // Filter departments if value is not set to "All"
-      if (department !== firstDepartment) {
-        filtered = filtered.filter((item) => item.department.name === department);
-      }
-
-      // Filter locations if value is not set to "All"
-      if (location !== firstLocation) {
-        filtered = filtered
-          .filter((item) => {
-            return (item.offices = item.offices.filter((office) => office.name === location));
-          })
-          .filter((item) => item.offices.length > 0);
-      }
-      // Update the state of the jobs listings with filtered data
-      setListingsData(formatData(filtered));
+    // Filter departments if value is not set to "All"
+    if (department !== firstDepartment) {
+      filtered = filtered.filter((item) => item.department.name === department);
     }
+
+    // Filter locations if value is not set to "All"
+    if (location !== firstLocation) {
+      filtered = filtered
+        .filter((item) => {
+          return (item.offices = item.offices.filter((office) => office.name === location));
+        })
+        .filter((item) => item.offices.length > 0);
+    }
+    // Update the state of the jobs listings with filtered data
+    setListingsData(formatData(filtered));
   }, [department, location]);
 
   return (
