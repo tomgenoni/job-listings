@@ -1,3 +1,5 @@
+@import 'vars';
+
 /* Color */
 
 .white {
@@ -1607,7 +1609,7 @@
 /* Grid */
 
 .grid {
-  margin-left: calc(-1 * $space3);
+  margin-left: -$space3;
   display: flex;
   flex-wrap: wrap;
 }
@@ -1618,7 +1620,7 @@
 }
 
 .grid-wide {
-  margin-left: calc(-1 * $space5);
+  margin-left: -$space5;
 }
 
 .grid-wide > * {
@@ -1683,7 +1685,7 @@
 
 @media only screen and (min-width: $breakpoint) {
   .m_grid {
-    margin-left: calc(-1 * $space3);
+    margin-left: -$space3;
     display: flex;
     flex-wrap: wrap;
   }
@@ -1694,7 +1696,7 @@
   }
 
   .m_grid-wide {
-    margin-left: calc(-1 * $space5);
+    margin-left: -$space5;
   }
 
   .m_grid-wide > * {

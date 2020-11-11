@@ -97,8 +97,6 @@ body {
   line-height: $lh4;
 }
 
-/* Type */
-
 /* Layout */
 .wrap {
   margin-left: auto;
@@ -106,64 +104,4 @@ body {
   padding-left: $space6;
   padding-right: $space6;
   max-width: calc($max-content-width + $space6 + $space6);
-}
-
-/* Job styles, hover colors and arrows */
-
-.job {
-  padding-top: 24px;
-  border-top: 2px solid $color-gray-300;
-  display: block;
-  text-decoration: none;
-  position: relative;
-}
-
-.job:hover {
-  border-top-color: $color-blue-300;
-}
-
-.job:hover:after {
-  content: '';
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid $color-blue-300;
-  border-right: 2px solid $color-blue-300;
-  position: absolute;
-  top: -7px;
-  right: 0;
-  transform: rotate(45deg);
-}
-
-.customer-success .job:hover,
-.customer-success .job:hover:after {
-  border-color: $color-blue-500;
-}
-
-.marketing .job:hover,
-.marketing .job:hover:after {
-  border-color: $color-red;
-}
-
-/* Hero illustration swap on hover */
-
-.hero-img {
-  max-width: 400px;
-}
-
-@media only screen and (min-width: 832px) {
-  .hero-img {
-    max-width: none;
-  }
-}
-
-.hero-animated {
-  display: none;
-}
-
-.hero-illu-wrap:hover .hero-animated {
-  display: block;
-}
-
-.hero-illu-wrap:hover .hero-static {
-  display: none;
 }

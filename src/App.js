@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import json from './data/data.json';
+import Hero from './components/Hero/index';
 import Select from './components/Select/index';
 import List from './components/List/index';
 import Label from './components/Label/index';
@@ -13,10 +14,10 @@ const firstLocation = 'All Locations';
 
 // Dropdown data
 const getDepartments = (data) => {
-  const arr = data.map((item) => item.department.name);
-  let unique = [...new Set(arr)];
-  unique.unshift(firstDepartment);
-  return unique;
+  // Create deduped array from array of all departemnts
+  let arr = [...new Set(data.map((item) => item.department.name))];
+  arr.unshift(firstDepartment);
+  return arr;
 };
 
 const getLocations = (data) => {
@@ -42,6 +43,7 @@ function App() {
 
   const formatData = () => {
     // Reset the jobs data with deep copy to prevent reference errors
+    // This approach doesn't always work, best to use custom func or lodash
     let filtered = JSON.parse(JSON.stringify([...json.jobs]));
 
     // Filter departments if dropdown not set to "All"
@@ -57,26 +59,23 @@ function App() {
         })
         .filter((item) => item.offices.length > 0);
     }
-    // Start to the structure of the jobs listings with filtering already applied
+
+    // Create new structure for jobs listings with filtering already applied
+
     // Get departments in the data, only one if one is selected
-    const selectedDepts = [];
-    for (const item of filtered) {
-      const department = item.department.name;
-      if (!selectedDepts.includes(department)) {
-        selectedDepts.push(department);
-      }
-    }
+    const selectedDepts = [...new Set(filtered.map((item) => item.department.name))];
 
     // Create an array that will hold all the newly formatted data
-    const formattedData = [];
+    const formatted = [];
+
     // Only include jobs are belong to selected department(s)
     for (const dept of selectedDepts) {
       const className = dept.toLowerCase().replace(/\s/g, '-');
       const jobs = filtered.filter((item) => item.department.name === dept);
       const item = { name: dept, className: className, jobs: jobs };
-      formattedData.push(item);
+      formatted.push(item);
     }
-    return formattedData;
+    return formatted;
   };
 
   // This holds the formatted data that is (mostly) logicless-template friendly
@@ -84,11 +83,32 @@ function App() {
 
   return (
     <div className='wrap'>
-      <Label text='asf' />
-      <Select onChange={(value) => setDepartment(value)} value={department} data={departments} />
-      <Label text='asf' />
-      <Select onChange={(value) => setLocation(value)} value={location} data={locations} />
-      <List data={listData} />
+      <Hero />
+      <section className='mt8 m_mt9 mb9 m_mb11'>
+        <div className='flex justify-center mb9'>
+          <div className='mr4'>
+            <Label text='Department' htmlFor='departments' />
+            <Select
+              onChange={(value) => setDepartment(value)}
+              value={department}
+              data={departments}
+              id='departments'
+              name='departments'
+            />
+          </div>
+          <div className='ml4'>
+            <Label text='Location' htmlFor='locations' />
+            <Select
+              onChange={(value) => setLocation(value)}
+              value={location}
+              data={locations}
+              id='locations'
+              name='locations'
+            />
+          </div>
+        </div>
+        <List data={listData} />
+      </section>
     </div>
   );
 }

@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from './index.module.scss';
 
-export default function Label({ text }) {
-  return <label className={styles.label}>{text}</label>;
+function Label({ text, htmlFor }) {
+  return (
+    <label className={styles.label} htmlFor={htmlFor}>
+      {text}
+    </label>
+  );
 }
+
+export default Label;

@@ -1,1 +1,35 @@
 @import '../../../../scss/vars';
+
+.job {
+  padding-top: 24px;
+  border-top: 2px solid $color-gray-300;
+  display: block;
+  text-decoration: none;
+  position: relative;
+}
+
+.job:hover {
+  border-top-color: $color-blue-300;
+}
+
+.job:hover:after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid $color-blue-300;
+  border-right: 2px solid $color-blue-300;
+  position: absolute;
+  top: -7px;
+  right: 0;
+  transform: rotate(45deg);
+}
+
+.customer-success .job:hover,
+.customer-success .job:hover:after {
+  border-color: $color-blue-500;
+}
+
+.marketing .job:hover,
+.marketing .job:hover:after {
+  border-color: $color-red;
+}
