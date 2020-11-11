@@ -24,12 +24,12 @@
   transform: rotate(45deg);
 }
 
-.customer-success .job:hover,
-.customer-success .job:hover:after {
+:global(.customer-success) .job:hover,
+:global(.customer-success) .job:hover:after {
   border-color: $color-blue-500;
 }
 
-.marketing .job:hover,
-.marketing .job:hover:after {
+:global(.marketing) .job:hover,
+:global(.marketing) .job:hover:after {
   border-color: $color-red;
 }
