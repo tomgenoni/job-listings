@@ -1,0 +1,169 @@
+@import 'vars';
+
+/* Reset */
+
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+img,
+video {
+  height: auto;
+  max-width: 100%;
+  width: 100%;
+  display: block;
+}
+
+/* Layout styles */
+
+@font-face {
+  font-family: 'GT Eesti';
+  src: url('https://airtable.com/font/GT-Eesti-Display-Regular-2.eot') format('eot'),
+    url('https://airtable.com/font/GT-Eesti-Display-Regular-2.ttf') format('ttf'),
+    url('https://airtable.com/font/GT-Eesti-Display-Regular-2.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GT Eesti';
+  src: url('https://airtable.com/font/GT-Eesti-Display-Medium-2.eot') format('eot'),
+    url('https://airtable.com/font/GT-Eesti-Display-Medium-2.ttf') format('ttf'),
+    url('https://airtable.com/font/GT-Eesti-Display-Medium-2.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+}
+
+body {
+  font-family: $sans-font;
+  font-weight: 400;
+  color: $color-gray-800;
+  font-size: $fs1;
+  line-height: $lh4;
+}
+
+/* Type */
+
+/* Layout */
+.wrap {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $space6;
+  padding-right: $space6;
+  max-width: calc($max-content-width + $space6 + $space6);
+}
+
+/* Job styles, hover colors and arrows */
+
+.job {
+  padding-top: 24px;
+  border-top: 2px solid $color-gray-300;
+  display: block;
+  text-decoration: none;
+  position: relative;
+}
+
+.job:hover {
+  border-top-color: $color-blue-300;
+}
+
+.job:hover:after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid $color-blue-300;
+  border-right: 2px solid $color-blue-300;
+  position: absolute;
+  top: -7px;
+  right: 0;
+  transform: rotate(45deg);
+}
+
+.customer-success .job:hover,
+.customer-success .job:hover:after {
+  border-color: $color-blue-500;
+}
+
+.marketing .job:hover,
+.marketing .job:hover:after {
+  border-color: $color-red;
+}
+
+/* Hero illustration swap on hover */
+
+.hero-img {
+  max-width: 400px;
+}
+
+@media only screen and (min-width: 832px) {
+  .hero-img {
+    max-width: none;
+  }
+}
+
+.hero-animated {
+  display: none;
+}
+
+.hero-illu-wrap:hover .hero-animated {
+  display: block;
+}
+
+.hero-illu-wrap:hover .hero-static {
+  display: none;
+}

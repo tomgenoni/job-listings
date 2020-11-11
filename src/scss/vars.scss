@@ -1,0 +1,45 @@
+$color-white: #fff;
+$color-red: #f82b60;
+$color-blue-500: #2d7ff9;
+$color-blue-300: #18bfff;
+$color-gray-100: #fafafa;
+$color-gray-300: #cccccc;
+$color-gray-600: #666666;
+$color-gray-800: #333333;
+
+/* Font size */
+$fs1: 16px;
+$fs2: 20px;
+$fs3: 24px;
+$fs4: 32px;
+$fs5: 64px;
+
+/* Line height */
+$lh1: 1;
+$lh2: 1.1;
+$lh3: 1.25;
+$lh4: 1.5;
+
+/* Letter spacing */
+$ls1: 1.28px;
+
+/* Space */
+$space1: 4px;
+$space2: 8px;
+$space3: 12px;
+$space4: 16px;
+$space5: 24px;
+$space6: 32px;
+$space7: 48px;
+$space8: 64px;
+$space9: 80px;
+$space10: 96px;
+$space11: 112px;
+
+/* Custom layout */
+$max-content-width: 1152px;
+$sans-font: 'GT Eesti', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol';
+
+$breakpoint: 832px;
