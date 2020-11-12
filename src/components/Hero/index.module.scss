@@ -1,0 +1,23 @@
+@import '../../scss/vars';
+
+.img {
+  max-width: 400px;
+}
+
+@media only screen and (min-width: $breakpoint) {
+  .img {
+    max-width: none;
+  }
+}
+
+.animated {
+  display: none;
+}
+
+.illuWrap:hover .animated {
+  display: block;
+}
+
+.illuWrap:hover .static {
+  display: none;
+}
