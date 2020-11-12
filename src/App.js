@@ -5,22 +5,20 @@ import Select from './components/Select/index';
 import List from './components/List/index';
 import Label from './components/Label/index';
 
-// import logo from './logo.svg';
-// import './App.css';
-
 const rawData = [...json.jobs];
 const firstDepartment = 'All Departments';
 const firstLocation = 'All Locations';
 
 // Dropdown data
 const getDepartments = (data) => {
-  // Create deduped array from array of all departemnts
+  // Create deduped array from array of all departments
   let arr = [...new Set(data.map((item) => item.department.name))];
   arr.unshift(firstDepartment);
   return arr;
 };
 
 const getLocations = (data) => {
+  // Create deduped array from array of all locations
   let arr = [];
   for (const item of data) {
     item.offices.forEach((office) => {
