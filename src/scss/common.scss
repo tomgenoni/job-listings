@@ -103,5 +103,5 @@ body {
   margin-right: auto;
   padding-left: $space6;
   padding-right: $space6;
-  max-width: calc($max-content-width + $space6 + $space6);
+  max-width: $max-content-width + $space6 + $space6;
 }

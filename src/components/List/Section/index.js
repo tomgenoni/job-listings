@@ -13,7 +13,7 @@ export default function Section({ data }) {
                 srcSet={`/img/${className}.png 1x, /img/${className}@2x.png 2x`}
                 width='40'
                 height='40px'
-                alt=''
+                alt={`${name} icon`}
               />
             </div>
             <div className='fs3 lh3'>{name}</div>
