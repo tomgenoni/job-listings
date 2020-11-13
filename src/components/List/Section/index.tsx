@@ -1,7 +1,21 @@
 import React from 'react';
 import Job from './Job/index';
 
-export default function Section({ data }) {
+interface SectionProps {
+  data: [
+    {
+      name: string;
+      className: string;
+      jobs: {
+        title: string;
+        offices: [{ name: string }];
+        id: number;
+      }[];
+    }
+  ];
+}
+
+const Section: React.FC<SectionProps> = ({ data }) => {
   return (
     <>
       {data.map(({ name, className, jobs }, i) => (
@@ -18,9 +32,11 @@ export default function Section({ data }) {
             </div>
             <div className='fs3 lh3'>{name}</div>
           </div>
-          <Job data={jobs} />
+          <Job jobs={jobs} />
         </div>
       ))}
     </>
   );
-}
+};
+
+export default Section;
