@@ -1,23 +1,9 @@
 import React from 'react';
 import Job from './Job/index';
 
-interface SectionProps {
-  data: {
-    name: string;
-    className: string;
-    jobs: {
-      title: string;
-      offices: [
-        {
-          name: string;
-        }
-      ];
-      id: number;
-    }[];
-  }[];
-}
+import { ListingsTypes } from 'common/interfaces';
 
-const Section: React.FC<SectionProps> = ({ data }) => {
+const Section: React.FC<ListingsTypes> = ({ data }) => {
   return (
     <>
       {data.map(({ name, className, jobs }, i) => (

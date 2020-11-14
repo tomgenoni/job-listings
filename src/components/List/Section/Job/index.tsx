@@ -1,15 +1,9 @@
 import React from 'react';
 import styles from './index.module.scss';
 
-interface JobProps {
-  jobs: {
-    title: string;
-    offices: [{ name: string }];
-    id: number;
-  }[];
-}
+import { JobTypes } from 'common/interfaces';
 
-const Job: React.FC<JobProps> = ({ jobs }) => {
+const Job: React.FC<JobTypes> = ({ jobs }) => {
   const url = 'https://airtable.com/job';
   return (
     <ul className='grid grid-wide'>

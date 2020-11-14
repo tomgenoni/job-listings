@@ -1,15 +1,9 @@
 import React from 'react';
 import styles from './index.module.scss';
 
-interface SelectProps {
-  onChange: (value: string, event: React.ChangeEvent<HTMLSelectElement>) => void;
-  value: string;
-  data: string[];
-  id: string;
-  name: string;
-}
+import { SelectTypes } from 'common/interfaces';
 
-const Select: React.FC<SelectProps> = ({ onChange, value, data, id, name }) => {
+const Select: React.FC<SelectTypes> = ({ onChange, value, data, id, name }) => {
   return (
     <select
       className={styles.select}
