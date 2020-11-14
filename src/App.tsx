@@ -19,7 +19,7 @@ const getDepartments = (data: SourceDataTypes[]) => {
   return arr;
 };
 
-const getLocations = (data: SourceDataTypes) => {
+const getLocations = (data: SourceDataTypes[]) => {
   // Create deduped array from array of all locations
   let arr: string[] = [];
   for (const item of data) {
