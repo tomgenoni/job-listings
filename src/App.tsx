@@ -72,10 +72,12 @@ function App() {
 
     // Only include jobs are belong to selected department(s)
     for (const dept of selectedDepts) {
-      const className = dept.toLowerCase().replace(/\s/g, '-');
-      const jobs = filtered.filter((item: SourceDataTypes) => item.department.name === dept);
-      const item = { name: dept, className: className, jobs: jobs };
-      formatted.push(item);
+      if (typeof dept === 'string') {
+        const className = dept.toLowerCase().replace(/\s/g, '-');
+        const jobs = filtered.filter((item: SourceDataTypes) => item.department.name === dept);
+        const item = { name: dept, className: className, jobs: jobs };
+        formatted.push(item);
+      }
     }
     return formatted;
   };
