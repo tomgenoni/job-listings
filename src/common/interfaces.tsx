@@ -1,3 +1,16 @@
+export interface SourceDataTypes {
+  id: number;
+  title: string;
+  offices: {
+    id: number;
+    name: string;
+  }[];
+  department: {
+    id: number;
+    name: string;
+  };
+}
+
 export interface SelectTypes {
   onChange: (value: string, event: React.ChangeEvent<HTMLSelectElement>) => void;
   value: string;

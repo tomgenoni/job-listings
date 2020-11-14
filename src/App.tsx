@@ -5,21 +5,23 @@ import Select from './components/Select/index';
 import List from './components/List/index';
 import Label from './components/Label/index';
 
+import { SourceDataTypes } from 'common/interfaces';
+
 const rawData = [...json.jobs];
 const firstDepartment = 'All Departments';
 const firstLocation = 'All Locations';
 
 // Dropdown data
-const getDepartments = (data) => {
+const getDepartments = (data: SourceDataTypes[]) => {
   // Create deduped array from array of all departments
-  let arr = [...new Set(data.map((item) => item.department.name))];
+  let arr = [...new Set(data.map((item: SourceDataTypes) => item.department.name))];
   arr.unshift(firstDepartment);
   return arr;
 };
 
-const getLocations = (data) => {
+const getLocations = (data: SourceDataTypes) => {
   // Create deduped array from array of all locations
-  let arr = [];
+  let arr: string[] = [];
   for (const item of data) {
     item.offices.forEach((office) => {
       arr.push(office.name);
@@ -46,22 +48,24 @@ function App() {
 
     // Filter departments if dropdown not set to "All"
     if (department !== firstDepartment) {
-      filtered = filtered.filter((item) => item.department.name === department);
+      filtered = filtered.filter((item: SourceDataTypes) => item.department.name === department);
     }
 
     // Filter locations if dropdown not set to "All"
     if (location !== firstLocation) {
       filtered = filtered
-        .filter((item) => {
+        .filter((item: SourceDataTypes) => {
           return (item.offices = item.offices.filter((office) => office.name === location));
         })
-        .filter((item) => item.offices.length > 0);
+        .filter((item: SourceDataTypes) => item.offices.length > 0);
     }
 
     // Create new structure for jobs listings with filtering already applied
 
     // Get departments in the data, only one if one is selected
-    const selectedDepts = [...new Set(filtered.map((item) => item.department.name))];
+    const selectedDepts = [
+      ...new Set(filtered.map((item: SourceDataTypes) => item.department.name)),
+    ];
 
     // Create an array that will hold all the newly formatted data
     const formatted = [];
@@ -69,7 +73,7 @@ function App() {
     // Only include jobs are belong to selected department(s)
     for (const dept of selectedDepts) {
       const className = dept.toLowerCase().replace(/\s/g, '-');
-      const jobs = filtered.filter((item) => item.department.name === dept);
+      const jobs = filtered.filter((item: SourceDataTypes) => item.department.name === dept);
       const item = { name: dept, className: className, jobs: jobs };
       formatted.push(item);
     }
