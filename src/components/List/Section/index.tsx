@@ -2,17 +2,19 @@ import React from 'react';
 import Job from './Job/index';
 
 interface SectionProps {
-  data: [
-    {
-      name: string;
-      className: string;
-      jobs: {
-        title: string;
-        offices: [{ name: string }];
-        id: number;
-      }[];
-    }
-  ];
+  data: {
+    name: string;
+    className: string;
+    jobs: {
+      title: string;
+      offices: [
+        {
+          name: string;
+        }
+      ];
+      id: number;
+    }[];
+  }[];
 }
 
 const Section: React.FC<SectionProps> = ({ data }) => {
