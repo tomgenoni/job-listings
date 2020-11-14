@@ -1,12 +1,20 @@
 import React from 'react';
 import styles from './index.module.scss';
 
-function Select({ onChange, value, data, id, name }) {
+interface SelectProps {
+  onChange: (value: string, event: React.ChangeEvent<HTMLSelectElement>) => void;
+  value: string;
+  data: string[];
+  id: string;
+  name: string;
+}
+
+const Select: React.FC<SelectProps> = ({ onChange, value, data, id, name }) => {
   return (
     <select
       className={styles.select}
       value={value}
-      onChange={(e) => onChange(e.target.value, e)}
+      onChange={(event): void => onChange(event.target.value, event)}
       id={id}
       name={name}
     >
@@ -17,6 +25,6 @@ function Select({ onChange, value, data, id, name }) {
       ))}
     </select>
   );
-}
+};
 
 export default Select;
